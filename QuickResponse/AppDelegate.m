@@ -7,15 +7,19 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SHKConfiguration.h"
+#import "ShareKitSombreroConfig.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    DefaultSHKConfigurator *configurator = [[ShareKitSombreroConfig alloc] init];
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+    [TestFlight takeOff:@"0912aacf-ab91-4968-ba57-befaceb7ae7a"];
     // Override point for customization after application launch.
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

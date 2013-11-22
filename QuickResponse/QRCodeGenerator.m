@@ -27,7 +27,7 @@
 @implementation QRCodeGenerator
 
 + (void)drawQRCode:(QRcode *)code context:(CGContextRef)ctx size:(CGFloat)size {
-	int margin = 0;
+	int margin = 5;
 	unsigned char *data = code->data;
 	int width = code->width;
 	int totalWidth = width + margin * 2;
@@ -73,7 +73,8 @@
 	
 	// create context
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	CGContextRef ctx = CGBitmapContextCreate(0, size, size, 8, size * 4, colorSpace, kCGImageAlphaPremultipliedLast);
+    CGBitmapInfo bitmapInfo = (CGBitmapInfo) kCGImageAlphaPremultipliedLast;
+	CGContextRef ctx = CGBitmapContextCreate(0, size, size, 8, size * 4, colorSpace, bitmapInfo);
 	
 	CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(0, -size);
 	CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1, -1);

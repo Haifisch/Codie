@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShareKit.h"
 
-@interface GenerateViewController : UIViewController
+#import "QRCodeGenerator.h"
+@interface GenerateViewController : UIViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+    NSArray            *countryNames;
+    BOOL isURL, isEmail, isPhone, isPlain;
+}
+@property (strong, nonatomic) IBOutlet UIImageView *qrImageView;
+- (IBAction)generateQR:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *qrText;
+- (IBAction)share:(id)sender;
+- (IBAction)exit:(id)sender;
 
 @end

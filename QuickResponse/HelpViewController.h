@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HelpViewController : UITableViewController
+- (IBAction)done:(id)sender;
 
 @end

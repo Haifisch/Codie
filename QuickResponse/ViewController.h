@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+#import "UIAlertView+Blocks.h"
+#import <AVFoundation/AVFoundation.h>
+#import "ShareKit.h"
+#import "QRCodeGenerator.h"
+@interface ViewController : UIViewController <UIAlertViewDelegate> {
+    BOOL alertShowing;
+    BOOL flashlightOn;
+}
+- (IBAction)light:(id)sender;
+- (IBAction)focusTap:(id)sender;
 @end
