@@ -15,7 +15,6 @@
 {
     DefaultSHKConfigurator *configurator = [[ShareKitSombreroConfig alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
-    [TestFlight takeOff:@"0912aacf-ab91-4968-ba57-befaceb7ae7a"];
     // Override point for customization after application launch.
     return YES;
 }

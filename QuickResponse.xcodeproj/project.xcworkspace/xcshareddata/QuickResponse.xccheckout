@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>092F263D-308D-44BD-8CB8-E097290D8321</string>
+	<key>IDESourceControlProjectName</key>
+	<string>QuickResponse</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2E577352-893F-4388-A70A-61899BE363D4</key>
+		<string>https://bitbucket.org/haifisch/quickresponse.git</string>
+		<key>73F1F424-14DD-480A-9C0A-A8ED7AD01AE3</key>
+		<string>git://github.com/ShareKit/ShareKit.git</string>
+		<key>9AB250A8-430F-4FDC-901F-ED21E869E63C</key>
+		<string>git://github.com/jakemdunn/google-api-objectivec-client.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>QuickResponse.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2E577352-893F-4388-A70A-61899BE363D4</key>
+		<string>../..</string>
+		<key>73F1F424-14DD-480A-9C0A-A8ED7AD01AE3</key>
+		<string>../../Submodules/ShareKit</string>
+		<key>9AB250A8-430F-4FDC-901F-ED21E869E63C</key>
+		<string>../../Submodules/ShareKit/Submodules/google-api-objectivec</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/haifisch/quickresponse.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2E577352-893F-4388-A70A-61899BE363D4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9AB250A8-430F-4FDC-901F-ED21E869E63C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>google-api-objectivec</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2E577352-893F-4388-A70A-61899BE363D4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>quickresponse</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>73F1F424-14DD-480A-9C0A-A8ED7AD01AE3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ShareKit</string>
+		</dict>
+	</array>
+</dict>
+</plist>

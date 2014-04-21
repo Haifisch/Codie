@@ -12,7 +12,6 @@
 @interface ViewController () <AVCaptureMetadataOutputObjectsDelegate> {
     NSTimer *_timer;
 }
-@property(nonatomic, strong) AVCaptureSession *session;
 @property(nonatomic, strong) UIView *previewView;
 @property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
 @property (strong, nonatomic) IBOutlet UIView *cameraView;
@@ -39,7 +38,7 @@
             [device unlockForConfiguration];
         }
     }
-    NSLog(@"focusing");
+    //NSLog(@"focusing");
 }
 - (void)viewDidLoad
 {
@@ -93,10 +92,14 @@
     // Get called back everytime something is recognised
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     [self.cameraView.layer addSublayer:self.previewLayer];
-    // Start the session running
     [self.session startRunning];
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (![self.session isRunning]) {
+        [self.session startRunning];
+    }
+}
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     UIAlertView *alert;
     CGRect highlightViewRect = CGRectZero;
@@ -265,4 +268,5 @@
             [device unlockForConfiguration];
         }
     } }
+
 @end

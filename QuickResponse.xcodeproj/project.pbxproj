@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B906984A18306A370067EC2C /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B906984918306A360067EC2C /* libTestFlight.a */; };
 		B906984C18306B070067EC2C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B906984B18306B070067EC2C /* libz.dylib */; };
+		B911E349186570B1008A5AC4 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B911E348186570B1008A5AC4 /* SpriteKit.framework */; };
+		B911E354186571F6008A5AC4 /* GenScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B911E353186571F6008A5AC4 /* GenScene.m */; };
 		B92845EF182C10F1004CF304 /* QR-code.png in Resources */ = {isa = PBXBuildFile; fileRef = B92845EE182C10F1004CF304 /* QR-code.png */; };
 		B95670C8181A397F007DE52E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95670C7181A397F007DE52E /* Foundation.framework */; };
 		B95670CA181A397F007DE52E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95670C9181A397F007DE52E /* CoreGraphics.framework */; };
@@ -408,11 +409,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B906981D18306A250067EC2C /* TestFlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		B906981E18306A250067EC2C /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		B906981F18306A250067EC2C /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		B906984918306A360067EC2C /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../../Downloads/TestFlightSDK2.0.2/libTestFlight.a; sourceTree = "<group>"; };
 		B906984B18306B070067EC2C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B911E348186570B1008A5AC4 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		B911E352186571F6008A5AC4 /* GenScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenScene.h; sourceTree = "<group>"; };
+		B911E353186571F6008A5AC4 /* GenScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenScene.m; sourceTree = "<group>"; };
 		B92845EE182C10F1004CF304 /* QR-code.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-code.png"; sourceTree = "<group>"; };
 		B95670C4181A397F007DE52E /* QuickResponse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickResponse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95670C7181A397F007DE52E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -434,6 +435,7 @@
 		B95670F0181A397F007DE52E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B95670F2181A397F007DE52E /* QuickResponseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickResponseTests.m; sourceTree = "<group>"; };
 		B95670FC181A3D08007DE52E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B956BA561865600400580074 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../../Downloads/TestFlightSDK2.1.3/libTestFlight.a; sourceTree = "<group>"; };
 		B979BB0A18287CD70004FF85 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		B979BB0B18287CD70004FF85 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		B979BB0C18287CD70004FF85 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B911E349186570B1008A5AC4 /* SpriteKit.framework in Frameworks */,
 				B906984C18306B070067EC2C /* libz.dylib in Frameworks */,
 				B99A2B76181B5AA200CA5531 /* Social.framework in Frameworks */,
 				B99A2B84181B5AD200CA5531 /* ImageIO.framework in Frameworks */,
@@ -540,7 +543,6 @@
 				B99A27BD181B4A0E00CA5531 /* AdSupport.framework in Frameworks */,
 				B95670CA181A397F007DE52E /* CoreGraphics.framework in Frameworks */,
 				B99A27BB181B49FA00CA5531 /* MessageUI.framework in Frameworks */,
-				B906984A18306A370067EC2C /* libTestFlight.a in Frameworks */,
 				B99A27B9181B49F600CA5531 /* QuartzCore.framework in Frameworks */,
 				B99A27B7181B49EE00CA5531 /* MapKit.framework in Frameworks */,
 				B99A27B5181B49E000CA5531 /* CoreLocation.framework in Frameworks */,
@@ -563,16 +565,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B906984818306A2B0067EC2C /* Flight */ = {
-			isa = PBXGroup;
-			children = (
-				B906981D18306A250067EC2C /* TestFlight.h */,
-				B906981E18306A250067EC2C /* TestFlight+AsyncLogging.h */,
-				B906981F18306A250067EC2C /* TestFlight+ManualSessions.h */,
-			);
-			name = Flight;
-			sourceTree = "<group>";
-		};
 		B95670BB181A397F007DE52E = {
 			isa = PBXGroup;
 			children = (
@@ -596,6 +588,8 @@
 		B95670C6181A397F007DE52E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B911E348186570B1008A5AC4 /* SpriteKit.framework */,
+				B956BA561865600400580074 /* libTestFlight.a */,
 				B906984B18306B070067EC2C /* libz.dylib */,
 				B906984918306A360067EC2C /* libTestFlight.a */,
 				B99A2B89181B5B9700CA5531 /* DropboxSDK.framework */,
@@ -634,7 +628,6 @@
 		B95670CD181A397F007DE52E /* QuickResponse */ = {
 			isa = PBXGroup;
 			children = (
-				B906984818306A2B0067EC2C /* Flight */,
 				B9A137B0182C73010058AF13 /* 1383894911_monk_user_religious_priest.png */,
 				B9A137AA182C6F250058AF13 /* Haifisch.png */,
 				B9A137A8182C69400058AF13 /* Julian.jpeg */,
@@ -661,6 +654,8 @@
 				B9A1377E182C61E80058AF13 /* HelpViewController.m */,
 				B99A26CF181B42FB00CA5531 /* GenerateViewController.h */,
 				B99A26D0181B42FB00CA5531 /* GenerateViewController.m */,
+				B911E352186571F6008A5AC4 /* GenScene.h */,
+				B911E353186571F6008A5AC4 /* GenScene.m */,
 				B95670DC181A397F007DE52E /* ViewController.h */,
 				B95670DD181A397F007DE52E /* ViewController.m */,
 				B95670DF181A397F007DE52E /* Images.xcassets */,
@@ -1248,6 +1243,7 @@
 				B99A26C6181B411D00CA5531 /* mask.c in Sources */,
 				B99A26C5181B411D00CA5531 /* bitstream.c in Sources */,
 				B99A26B5181B3C4100CA5531 /* UIAlertView+Blocks.m in Sources */,
+				B911E354186571F6008A5AC4 /* GenScene.m in Sources */,
 				B99A26C8181B411D00CA5531 /* qrinput.c in Sources */,
 				B99A26D1181B42FB00CA5531 /* GenerateViewController.m in Sources */,
 				B99A2B91181B5CF800CA5531 /* ShareKitSombreroConfig.m in Sources */,
@@ -1405,6 +1401,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Haifisch/Downloads/TestFlightSDK2.0.2,
+					/Users/haifisch/Downloads/TestFlightSDK2.1.3,
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1438,6 +1435,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Haifisch/Downloads/TestFlightSDK2.0.2,
+					/Users/haifisch/Downloads/TestFlightSDK2.1.3,
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (

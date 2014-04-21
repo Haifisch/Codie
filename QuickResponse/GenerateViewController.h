@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ShareKit.h"
-
 #import "QRCodeGenerator.h"
 @interface GenerateViewController : UIViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     NSArray            *countryNames;

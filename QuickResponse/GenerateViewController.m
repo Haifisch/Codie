@@ -8,7 +8,6 @@
 
 #import "GenerateViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
 @interface GenerateViewController ()
 
 @end
@@ -18,9 +17,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    isEmail = YES;
-    isURL = NO;
+    // Configure the view.
+   
+    isEmail = NO;
+    isURL = YES;
     isPhone = NO;
     isPlain = NO;
     self.qrImageView.image = [QRCodeGenerator qrImageForString:@"QuickResponse is awesome!" imageSize:self.qrImageView.bounds.size.width];

@@ -17,4 +17,5 @@
 }
 - (IBAction)light:(id)sender;
 - (IBAction)focusTap:(id)sender;
+@property(nonatomic, strong) AVCaptureSession *session;
 @end
