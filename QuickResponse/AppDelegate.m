@@ -7,14 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "SHKConfiguration.h"
-#import "ShareKitSombreroConfig.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    DefaultSHKConfigurator *configurator = [[ShareKitSombreroConfig alloc] init];
-    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     // Override point for customization after application launch.
     return YES;
 }
