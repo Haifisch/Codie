@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIAlertView+Blocks.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ShareKit.h"
 #import "QRCodeGenerator.h"
 @interface ViewController : UIViewController <UIAlertViewDelegate> {
     BOOL alertShowing;

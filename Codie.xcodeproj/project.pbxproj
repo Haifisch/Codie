@@ -99,7 +99,7 @@
 		B95670C7181A397F007DE52E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B95670C9181A397F007DE52E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B95670CB181A397F007DE52E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		B95670CF181A397F007DE52E /* Codie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Codie-Info.plist"; sourceTree = "<group>"; };
+		B95670CF181A397F007DE52E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B95670D1181A397F007DE52E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B95670D3181A397F007DE52E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B95670D5181A397F007DE52E /* Codie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Codie-Prefix.pch"; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 		B95670CE181A397F007DE52E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B95670CF181A397F007DE52E /* Codie-Info.plist */,
+				B95670CF181A397F007DE52E /* Info.plist */,
 				B95670D0181A397F007DE52E /* InfoPlist.strings */,
 				B95670D3181A397F007DE52E /* main.m */,
 				B95670D5181A397F007DE52E /* Codie-Prefix.pch */,
@@ -660,10 +660,11 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "QuickResponse/Supporting Files/Codie-Prefix.pch";
-				INFOPLIST_FILE = "QuickResponse/Supporting Files/Codie-Info.plist";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QuickResponse/Supporting Files/Codie-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/QuickResponse/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				New_Setting = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -688,10 +689,11 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "QuickResponse/Supporting Files/Codie-Prefix.pch";
-				INFOPLIST_FILE = "QuickResponse/Supporting Files/Codie-Info.plist";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QuickResponse/Supporting Files/Codie-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/QuickResponse/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				New_Setting = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -708,14 +710,14 @@
 		B95670FA181A397F007DE52E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/QuickResponse.app/QuickResponse";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Codie.app/Codie";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "QuickResponse/Supporting Files/QuickResponse-Prefix.pch";
+				GCC_PREFIX_HEADER = "QuickResponse/Supporting Files/Codie-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -730,14 +732,14 @@
 		B95670FB181A397F007DE52E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/QuickResponse.app/QuickResponse";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Codie.app/Codie";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "QuickResponse/Supporting Files/QuickResponse-Prefix.pch";
+				GCC_PREFIX_HEADER = "QuickResponse/Supporting Files/Codie-Prefix.pch";
 				INFOPLIST_FILE = "QuickResponseTests/Supporting Files/CodieTests-Info.plist";
 				PRODUCT_NAME = CodieTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";

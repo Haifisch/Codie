@@ -9,8 +9,14 @@
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #define debug 0
+
+struct valueTypes {
+    BOOL isEmail, isPhone, isURL, isPlain;
+};
+
 @interface ViewController () <AVCaptureMetadataOutputObjectsDelegate> {
     NSTimer *_timer;
+    struct valueTypes Types;
 }
 @property(nonatomic, strong) UIView *previewView;
 @property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
@@ -44,6 +50,7 @@
 {
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
+
     self.cameraView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     self.session = [[AVCaptureSession alloc] init];
     // create the preview layer
@@ -101,6 +108,11 @@
     }
 }
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    Types.isEmail = NO;
+    Types.isPhone = NO;
+    Types.isURL = NO;
+    Types.isPlain = NO;
+    
     UIAlertView *alert;
     CGRect highlightViewRect = CGRectZero;
     AVMetadataMachineReadableCodeObject *barCodeObject;
@@ -118,65 +130,33 @@
                 detectionString = [(AVMetadataMachineReadableCodeObject *)metadata stringValue];
                 break;
             }
-        }
-        
+    }
         if (detectionString != nil)
         {
-            NSURL *url = [[NSURL alloc] initWithString:detectionString];
-            if(debug)NSLog(@"%@", [url scheme]);
-            if ([[url scheme] isEqual:@"http"] || [[url scheme] isEqual:@"https"]) {
+            NSString *cleanString = [self checkStringForEach:detectionString];
+            if (Types.isURL || Types.isPhone || Types.isEmail) {
                 if (!alertShowing) {
                     RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No" action:^{
                         alertShowing = NO;
                     }];
                     
                     RIButtonItem *deleteItem = [RIButtonItem itemWithLabel:@"Yes" action:^{
-                        [[UIApplication sharedApplication] openURL:url];
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:detectionString]];
                         alertShowing = NO;
                     }];
-                                        alert = [[UIAlertView alloc] initWithTitle:@"Would you like to open" message:detectionString cancelButtonItem:cancelItem otherButtonItems:deleteItem,nil];
+                    NSString *welcomeMessage;
+                    if (Types.isURL) {
+                        welcomeMessage = @"Would you like to open this link in Safari?";
+                    }else if (Types.isPhone){
+                        welcomeMessage = @"Would you like to call this phone number?";
+                    }else if (Types.isEmail) {
+                        welcomeMessage = @"Would you like to compose a new email to go to this address?";
+                    }
+                    alert = [[UIAlertView alloc] initWithTitle:cleanString  message:welcomeMessage cancelButtonItem:cancelItem otherButtonItems:deleteItem,nil];
                     alertShowing = YES;
                     [alert show];
-                             
                 }
-                if(debug)NSLog(@"It's a URL");
-            }
-            if ([[url scheme] isEqual:@"TEL"]) {
-                if (!alertShowing) {
-                    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No" action:^{
-                        alertShowing = NO;
-                    }];
-                    
-                    RIButtonItem *deleteItem = [RIButtonItem itemWithLabel:@"Yes" action:^{
-                        [[UIApplication sharedApplication] openURL:url];
-                        alertShowing = NO;
-                    }];
-                    
-                    alert = [[UIAlertView alloc] initWithTitle:@"Would you like to call" message:detectionString cancelButtonItem:cancelItem otherButtonItems:deleteItem, nil];
-                    alertShowing = YES;
-                    [alert show];
-                    
-                }
-                if(debug)NSLog(@"It's a phone number");
-            }
-            if ([[url scheme] isEqual:@"MAILTO"]) {
-                if (!alertShowing) {
-                    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No" action:^{
-                        alertShowing = NO;
-                    }];
-                    
-                    RIButtonItem *deleteItem = [RIButtonItem itemWithLabel:@"Yes" action:^{
-                        [[UIApplication sharedApplication] openURL:url];
-                        alertShowing = NO;
-                    }];
-                    alert = [[UIAlertView alloc] initWithTitle:@"Would you like to email" message:detectionString cancelButtonItem:cancelItem otherButtonItems:deleteItem, nil];
-                    alertShowing = YES;
-                    [alert show];
-                    
-                }
-                if(debug)NSLog(@"It's a email");
-            }
-            if (![url scheme]) {
+            }else if (Types.isPlain) {
                 if (!alertShowing) {
                     RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Ok" action:^{
                         alertShowing = NO;
@@ -190,9 +170,7 @@
                     alert = [[UIAlertView alloc] initWithTitle:Nil message:detectionString cancelButtonItem:cancelItem otherButtonItems:deleteItem, nil];
                     alertShowing = YES;
                     [alert show];
-                    
                 }
-                if(debug)NSLog(@"It's plain text");
             }
 
             _label.text = detectionString;
@@ -213,21 +191,15 @@
 }
 
 - (IBAction)light:(id)sender {
-
-        if (flashlightOn == NO)
-        {
-            flashlightOn = YES;
-            [self turnTorchOn:YES];
-        }
-        else
-        {
-            flashlightOn = NO;
-            [self turnTorchOn:NO];
-        }
-        
-
+    if (flashlightOn == NO) {
+        flashlightOn = YES;
+        [self turnTorchOn:YES];
+    } else {
+        flashlightOn = NO;
+        [self turnTorchOn:NO];
+    }
 }
-- (void) turnTorchOn: (bool) on {
+- (void)turnTorchOn:(bool)on {
     
     // check if flashlight available
     Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
@@ -247,6 +219,55 @@
             }
             [device unlockForConfiguration];
         }
-    } }
+    }
+}
 
+#pragma Regex Comparison Functions
+-(NSString *)checkStringForEach:(NSString *)string {
+    // Do initial check with email to remove the mailto scheme before actual checking
+    if ([[[NSURL URLWithString:string] scheme] isEqual:@"MAILTO"] || [[[NSURL URLWithString:string] scheme] isEqual:@"mailto"]) {
+        NSString *removeMe = [[NSURL URLWithString:string] scheme];
+        string = [string stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@:",removeMe] withString:@""];
+    }
+    // Do the same check for phone to remove the tel scheme before actual checking
+    if ([[[NSURL URLWithString:string] scheme] isEqual:@"TEL"] || [[[NSURL URLWithString:string] scheme] isEqual:@"tel"]) {
+        NSString *removeMe = [[NSURL URLWithString:string] scheme];
+        string = [string stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@:",removeMe] withString:@""];
+    }
+    // Do the actual checks
+    if ([self NSStringIsValidEmail:string]) {
+        Types.isEmail = YES;
+        return string;
+    }else if ([self NSStringIsValidLink:string]) {
+        Types.isURL = YES;
+        return string;
+    }else if ([self NSStringIsValidPhoneNumer:string]){
+        Types.isPhone = YES;
+        return string;
+    }else {
+        Types.isPlain = YES;
+        return string;
+    }
+}
+-(BOOL)NSStringIsValidEmail:(NSString *)string
+{
+    NSString *stricterFilterString = @"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
+    NSString *emailRegex = stricterFilterString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:string];
+}
+
+-(BOOL)NSStringIsValidPhoneNumer:(NSString *)string {
+    NSString *laxString = @"^(?:[+]?1[-. ]?)?[(]?([0-9]{3})[)]?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+    NSString *phoneRegex =  laxString;
+    NSPredicate *phoneText = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    return [phoneText evaluateWithObject:string];
+}
+
+-(BOOL)NSStringIsValidLink:(NSString *)string {
+    NSString *laxString = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSString *urlRegex =  laxString;
+    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegex];
+    return [urlTest evaluateWithObject:string];
+}
 @end
