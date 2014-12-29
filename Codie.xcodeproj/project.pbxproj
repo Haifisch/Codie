@@ -25,7 +25,6 @@
 		B95670F1181A397F007DE52E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B95670EF181A397F007DE52E /* InfoPlist.strings */; };
 		B95670F3181A397F007DE52E /* QuickResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B95670F2181A397F007DE52E /* QuickResponseTests.m */; };
 		B95670FD181A3D08007DE52E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95670FC181A3D08007DE52E /* AVFoundation.framework */; };
-		B97585E019661A6B009E7CB2 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B97585DE19661A6B009E7CB2 /* Main-iPad.storyboard */; };
 		B99A26B3181B3C4100CA5531 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B99A26AE181B3C4100CA5531 /* RIButtonItem.m */; };
 		B99A26B4181B3C4100CA5531 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B99A26B0181B3C4100CA5531 /* UIActionSheet+Blocks.m */; };
 		B99A26B5181B3C4100CA5531 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B99A26B2181B3C4100CA5531 /* UIAlertView+Blocks.m */; };
@@ -115,7 +114,6 @@
 		B95670F0181A397F007DE52E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B95670F2181A397F007DE52E /* QuickResponseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickResponseTests.m; sourceTree = "<group>"; };
 		B95670FC181A3D08007DE52E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B97585DF19661A6B009E7CB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
 		B99A26AD181B3C4100CA5531 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
 		B99A26AE181B3C4100CA5531 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
 		B99A26AF181B3C4100CA5531 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
@@ -370,7 +368,6 @@
 			children = (
 				B9D7EB7E19D778C500523840 /* LaunchImage.xib */,
 				B95670D9181A397F007DE52E /* Main.storyboard */,
-				B97585DE19661A6B009E7CB2 /* Main-iPad.storyboard */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -477,7 +474,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B97585E019661A6B009E7CB2 /* Main-iPad.storyboard in Resources */,
 				B9A137A9182C69400058AF13 /* Julian.jpeg in Resources */,
 				B9E6DDE81828567700BCAE05 /* 64-zap.png in Resources */,
 				B95670E0181A397F007DE52E /* Images.xcassets in Resources */,
@@ -566,14 +562,6 @@
 				B95670F0181A397F007DE52E /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		B97585DE19661A6B009E7CB2 /* Main-iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B97585DF19661A6B009E7CB2 /* Base */,
-			);
-			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -711,6 +699,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Codie.app/Codie";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -733,6 +723,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Codie.app/Codie";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

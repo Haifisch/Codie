@@ -16,6 +16,7 @@ struct valueTypes {
 
 @interface ViewController () <AVCaptureMetadataOutputObjectsDelegate> {
     NSTimer *_timer;
+    UIVisualEffectView *visualEffectView;
     struct valueTypes Types;
 }
 @property(nonatomic, strong) UIView *previewView;
@@ -100,6 +101,16 @@ struct valueTypes {
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     [self.cameraView.layer addSublayer:self.previewLayer];
     [self.session startRunning];
+    
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    visualEffectView.frame = self.cameraView.bounds;
+    [self.cameraView addSubview:visualEffectView];
+    [self setBlurrHidden:YES duration:1];
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -136,13 +147,16 @@ struct valueTypes {
             NSString *cleanString = [self checkStringForEach:detectionString];
             if (Types.isURL || Types.isPhone || Types.isEmail) {
                 if (!alertShowing) {
+                    [self setBlurrHidden:NO duration:1];
                     RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No" action:^{
+                        [self setBlurrHidden:YES duration:1];
                         alertShowing = NO;
                     }];
                     
                     RIButtonItem *deleteItem = [RIButtonItem itemWithLabel:@"Yes" action:^{
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:detectionString]];
                         alertShowing = NO;
+                        [self setBlurrHidden:YES duration:1];
                     }];
                     NSString *welcomeMessage;
                     if (Types.isURL) {
@@ -158,7 +172,9 @@ struct valueTypes {
                 }
             }else if (Types.isPlain) {
                 if (!alertShowing) {
+                    [self setBlurrHidden:NO duration:1];
                     RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Ok" action:^{
+                        [self setBlurrHidden:YES duration:1];
                         alertShowing = NO;
                     }];
                     
@@ -166,6 +182,7 @@ struct valueTypes {
                         UIPasteboard *appPasteBoard = [UIPasteboard generalPasteboard];
                         [appPasteBoard setString:detectionString];
                         alertShowing = NO;
+                        [self setBlurrHidden:YES duration:1];
                     }];
                     alert = [[UIAlertView alloc] initWithTitle:Nil message:detectionString cancelButtonItem:cancelItem otherButtonItems:deleteItem, nil];
                     alertShowing = YES;
@@ -221,7 +238,13 @@ struct valueTypes {
         }
     }
 }
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"segueGenerate"]) {
+        if ([self.session isRunning]) {
+            [self.session stopRunning];
+        }
+    }
+}
 #pragma Regex Comparison Functions
 -(NSString *)checkStringForEach:(NSString *)string {
     // Do initial check with email to remove the mailto scheme before actual checking
@@ -269,5 +292,26 @@ struct valueTypes {
     NSString *urlRegex =  laxString;
     NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegex];
     return [urlTest evaluateWithObject:string];
+}
+
+#pragma Blur view animation
+-(void)setBlurrHidden:(BOOL)hide duration:(NSTimeInterval)duration {
+    if(visualEffectView.hidden == hide)
+        return;
+    if(hide)
+        visualEffectView.alpha = 1;
+    else {
+        visualEffectView.alpha = 0;
+        visualEffectView.hidden = NO;
+    }
+    [UIView animateWithDuration:duration animations:^{
+        if (hide)
+            visualEffectView.alpha = 0;
+        else
+            visualEffectView.alpha = 1;
+    } completion:^(BOOL finished) {
+        if(finished)
+            visualEffectView.hidden = hide;
+    }];
 }
 @end

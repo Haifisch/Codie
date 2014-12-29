@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 #import "QRCodeGenerator.h"
-@interface GenerateViewController : UIViewController <UITextFieldDelegate, UIDocumentInteractionControllerDelegate>
+#import <AVFoundation/AVFoundation.h>
+@interface GenerateViewController : UIViewController <UITextFieldDelegate, UIDocumentInteractionControllerDelegate, AVCaptureMetadataOutputObjectsDelegate>
+
+
+@property(nonatomic, strong) UIView *previewView;
+@property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property (strong, nonatomic) IBOutlet UIView *cameraView;
+@property(nonatomic, strong) AVCaptureSession *session;
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *qrImageView;
 @property (strong, nonatomic) IBOutlet UITextField *qrText;

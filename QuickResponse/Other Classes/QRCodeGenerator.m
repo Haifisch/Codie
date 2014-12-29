@@ -39,7 +39,6 @@
 		pixelSize = imageSize / width;
 		margin = (imageSize - width * pixelSize) / 2;
 	}
-	
 	CGRect rectDraw = CGRectMake(0.0f, 0.0f, pixelSize, pixelSize);
 	// draw
 	CGContextSetFillColor(ctx, CGColorGetComponents([UIColor blackColor].CGColor));
@@ -53,6 +52,51 @@
 		}
 	}
 	CGContextFillPath(ctx);
+}
+
++ (UIImage *)addBorderToImage:(UIImage *)image {
+    CGImageRef bgimage = [image CGImage];
+    float width = CGImageGetWidth(bgimage) + 20;
+    float height = CGImageGetHeight(bgimage) + 20;
+    
+    // Create a temporary texture data buffer
+    void *data = malloc(width * height * 4);
+    
+    // Draw image to buffer
+    CGContextRef ctx = CGBitmapContextCreate(data,
+                                             width,
+                                             height,
+                                             8,
+                                             width * 4,
+                                             CGImageGetColorSpace(image.CGImage),
+                                             kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(ctx, CGRectMake(0, 0, (CGFloat)width, (CGFloat)height), bgimage);
+    
+    //Set the stroke (pen) color
+    CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
+    
+    //Set the width of the pen mark
+    CGFloat borderWidth = (float)width*0.05;
+    CGContextSetLineWidth(ctx, borderWidth);
+    
+    //Start at 0,0 and draw a square
+    CGContextMoveToPoint(ctx, 0.0, 0.0);
+    CGContextAddLineToPoint(ctx, 0.0, height);
+    CGContextAddLineToPoint(ctx, width, height);
+    CGContextAddLineToPoint(ctx, width, 0.0);
+    CGContextAddLineToPoint(ctx, 0.0, 0.0);
+    
+    //Draw it
+    CGContextStrokePath(ctx);
+    
+    // write it to a new image
+    CGImageRef cgimage = CGBitmapContextCreateImage(ctx);
+    UIImage *newImage = [UIImage imageWithCGImage:cgimage];
+    CFRelease(cgimage);
+    CGContextRelease(ctx);
+    
+    // auto-released
+    return newImage;
 }
 
 + (UIImage *)qrImageForString:(NSString *)string imageSize:(CGFloat)size {
@@ -75,7 +119,7 @@
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGBitmapInfo bitmapInfo = (CGBitmapInfo) kCGImageAlphaPremultipliedLast;
 	CGContextRef ctx = CGBitmapContextCreate(0, size, size, 8, size * 4, colorSpace, bitmapInfo);
-	
+    
 	CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(0, -size);
 	CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1, -1);
 	CGContextConcatCTM(ctx, CGAffineTransformConcat(translateTransform, scaleTransform));
@@ -83,6 +127,8 @@
 	// draw QR on this context	
 	[QRCodeGenerator drawQRCode:code context:ctx size:size];
 	
+    
+    
 	// get image
 	CGImageRef qrCGImage = CGBitmapContextCreateImage(ctx);
 	UIImage * qrImage = [UIImage imageWithCGImage:qrCGImage];
